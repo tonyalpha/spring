@@ -1,22 +1,19 @@
-package be.antonsherri.opdracht1.housekeeping;
+package be.antonsherri.opdracht2.housekeeping;
 
-import be.antonsherri.opdracht1.housekeeping.services.*;
+import be.antonsherri.opdracht2.housekeeping.services.*;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class HouseApp {
     public static void main(String [] args) {
-        CleaningTool broom = new Broom();
-        CleaningTool vacuum = new VacuumCleaner();
-        CleaningTool sponge = new Sponge();
 
-        CleaningServiceImpl jill = new CleaningServiceImpl();
-        jill.setCleaningTool(broom);
-        CleaningServiceImpl bob = new CleaningServiceImpl();
-        bob.setCleaningTool(vacuum);
-        CleaningServiceImpl patrick = new CleaningServiceImpl();
-        patrick.setCleaningTool(sponge);
-
-        jill.clean();
-        bob.clean();
-        patrick.clean();
+        try (ConfigurableApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class)) {
+            CleaningService jill = ctx.getBean("jill", CleaningService.class);
+            CleaningService bob = ctx.getBean("bob", CleaningService.class);
+            CleaningService patrick = ctx.getBean("patrick", CleaningService.class);
+            jill.clean();
+            bob.clean();
+            patrick.clean();
+        }
     }
 }

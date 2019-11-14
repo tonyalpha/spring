@@ -1,4 +1,4 @@
-package be.antonsherri.opdracht2.housekeeping.services;
+package be.antonsherri.opdracht4.housekeeping.services;
 
 public class CleaningServiceImpl implements CleaningService {
         private CleaningTool tool;
