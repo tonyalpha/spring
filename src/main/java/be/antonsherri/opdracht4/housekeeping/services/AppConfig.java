@@ -6,6 +6,7 @@ import org.springframework.context.annotation.*;
 public class AppConfig {
 
     @Bean
+    @Primary
     @Scope("prototype")
     public CleaningTool broom() {
         return new Broom();
@@ -29,36 +30,64 @@ public class AppConfig {
         return new DisposableDuster();
     }
 
+    @Bean
+    public GardeningTool lawnMower() {
+        return new LawnMower();
+    }
 
     @Bean(name = "BroomService")
     @Lazy
     public CleaningService jill() {
         System.out.println("CleaningService Jill initialized");
-        CleaningServiceImpl cs = new CleaningServiceImpl();
-        cs.setCleaningTool(broom());
-        return cs;
+        CleaningServiceImpl csi = new CleaningServiceImpl();
+        csi.setCleaningTool(broom());
+        return csi;
     }
 
     @Bean(name = "VacuumService")
     public CleaningService bob() {
         System.out.println("CleaningService Bob initialized");
-        CleaningServiceImpl cs = new CleaningServiceImpl();
-        cs.setCleaningTool(vacuum());
-        return cs;
+        CleaningServiceImpl csi = new CleaningServiceImpl();
+        csi.setCleaningTool(vacuum());
+        return csi;
     }
 
     @Bean(name = "SpongeService")
     public CleaningService jane() {
         System.out.println("CleaningService Jane initialized");
-        CleaningServiceImpl cs = new CleaningServiceImpl();
-        cs.setCleaningTool(sponge());
-        return cs;
+        CleaningServiceImpl csi = new CleaningServiceImpl();
+        csi.setCleaningTool(sponge());
+        return csi;
     }
+
     @Bean(name = "DusterService")
     public CleaningService scott() {
         System.out.println("CleaningService Scott initialized");
-        CleaningServiceImpl cs = new CleaningServiceImpl();
-        cs.setCleaningTool(disposableDuster());
-        return cs;
+        CleaningServiceImpl csi = new CleaningServiceImpl();
+        csi.setCleaningTool(disposableDuster());
+        return csi;
+    }
+
+    @Bean(name = "LawnMowerService", initMethod = "init", destroyMethod = "destroy")
+    public GardeningService jake(GardeningTool tool) {
+        GardeningServiceImpl gsi = new GardeningServiceImpl();
+        gsi.setGardeningTool(tool);
+        return gsi;
+    }
+
+    @Bean
+    public CleaningService jamie(CleaningTool tool) {
+        System.out.println("CleaningService Jamie initialized");
+        CleaningServiceImpl csi = new CleaningServiceImpl();
+        csi.setCleaningTool(tool);
+        return csi;
+    }
+    @Bean
+    public DomesticService tony() {
+        System.out.println("DomesticService tony initialized");
+        DomesticServiceImpl domesticServiceImpl = new DomesticServiceImpl();
+        domesticServiceImpl.setCleaningService(jamie(broom()));
+        domesticServiceImpl.setGardeningService(jake(lawnMower()));
+        return domesticServiceImpl;
     }
 }
