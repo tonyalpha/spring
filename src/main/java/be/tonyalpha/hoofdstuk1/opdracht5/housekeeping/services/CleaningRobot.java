@@ -23,7 +23,7 @@ public class CleaningRobot implements CleaningService {
         this.tools = tools;
     }
     public void clean(){
-        logger.info("Cleaning the house.");
+        logger.info("Robot cleaning the house.");
         tools.forEach(CleaningTool::doCleanJob);
     }
 }

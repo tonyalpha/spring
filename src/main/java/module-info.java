@@ -3,4 +3,5 @@ open module spring {
     requires spring.core;
     requires spring.beans;
     requires java.sql;
+    requires java.annotation;
 }
