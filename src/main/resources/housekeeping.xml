@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd"
+       default-init-method="init" default-destroy-method="destroy">
+
+    <context:property-placeholder location="classpath:application.properties"/>
+    <context:component-scan base-package="be.tonyalpha.hoofdstuk1.opdracht9.housekeeping" />
+
+    <bean id="broom" class="be.tonyalpha.hoofdstuk1.opdracht9.housekeeping.services.Broom" scope="prototype" />
+
+    <bean id="vacuum" class="be.tonyalpha.hoofdstuk1.opdracht9.housekeeping.services.VacuumCleaner" scope="prototype" />
+
+    <bean id="sponge" class="be.tonyalpha.hoofdstuk1.opdracht9.housekeeping.services.Sponge" scope="prototype" />
+
+    <bean id="lawnMower" class="be.tonyalpha.hoofdstuk1.opdracht9.housekeeping.services.LawnMower" />
+
+    <bean id="cleaningService" class="be.tonyalpha.hoofdstuk1.opdracht9.housekeeping.services.CleaningServiceImpl">
+        <property name="cleaningTool" ref="broom" />
+        <property name="rate" value="9" />
+    </bean>
+
+    <bean id="gardeningService" class="be.tonyalpha.hoofdstuk1.opdracht9.housekeeping.services.GardeningServiceImpl">
+        <property name="gardeningTool" ref="lawnMower" />
+    </bean>
+
+    <bean id="domesticService" class="be.tonyalpha.hoofdstuk1.opdracht9.housekeeping.services.DomesticServiceImpl">
+        <property name="cleaningService" ref="cleaningService" />
+        <property name="gardeningService" ref="gardeningService" />
+    </bean>
+</beans>
