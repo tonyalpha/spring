@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 @Service
 @Primary
-@Profile({"smallHouse | bigHouse"})
+@Profile({"smallHouse"})
 public class CleaningServiceImpl implements CleaningService {
         private CleaningTool tool;
         private Logger logger;

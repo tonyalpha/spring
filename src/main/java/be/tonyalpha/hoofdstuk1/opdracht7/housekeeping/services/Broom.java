@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 @Component
 @Scope("prototype")
 @Order(1)
+@Profile("smallHouse | bigHouse")
 public class Broom implements CleaningTool {
     private Logger logger;
 

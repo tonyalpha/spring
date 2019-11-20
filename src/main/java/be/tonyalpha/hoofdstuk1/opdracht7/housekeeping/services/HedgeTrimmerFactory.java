@@ -3,12 +3,14 @@ package be.tonyalpha.hoofdstuk1.opdracht7.housekeeping.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
 import java.util.logging.Logger;
 
 @Component
+@Profile("bigHouse")
 public class HedgeTrimmerFactory {
     private Logger logger;
 

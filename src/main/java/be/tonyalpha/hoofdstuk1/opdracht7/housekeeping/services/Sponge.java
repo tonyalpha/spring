@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 @Scope("prototype")
 @Order(4)
 @Qualifier("wet")
+@Profile("smallHouse | bigHouse")
 public class Sponge implements CleaningTool {
     private Logger logger;
     Sponge() {
