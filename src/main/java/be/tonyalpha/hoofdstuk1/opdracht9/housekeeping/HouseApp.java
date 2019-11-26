@@ -9,7 +9,7 @@ public class HouseApp {
             ctx.getEnvironment().setActiveProfiles("smallHouse");
             ctx.setConfigLocation("housekeeping.xml");
             ctx.refresh();
-            DomesticService domesticService = ctx.getBean("domesticService", DomesticService.class);
+            DomesticService domesticService = ctx.getBean("domesticServiceImpl", DomesticService.class);
             domesticService.runHouseHold();
             // XML FILE NEEDS TO BE IN SRC\MAIN\RESOURCES\
             // APPLICATION.PROPERTIES FILE NEEDS TO BE IN SRC\MAIN\JAVA
